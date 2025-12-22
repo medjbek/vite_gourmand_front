@@ -12,8 +12,6 @@
               Des menus frais préparés chaque jour par<br />
               Julie &amp; José.
             </h1>
-
-            <q-btn label="Commander" class="q-mt-md section-principale-btn" rounded unelevated />
           </div>
 
           <!-- Colonne image  principale-->
@@ -193,15 +191,6 @@
 .section-principale-text p {
   font-family: 'Inter', sans-serif;
   font-size: 0.95rem;
-}
-
-/* bouton Commander */
-.section-principale-btn {
-  background-color: #281504; /* bg Primary  */
-  color: #f7f3e6; /* texte clair */
-  border-radius: 999px;
-  padding: 0 24px;
-  font-weight: 500;
 }
 
 /* Bloc image - section principale */
