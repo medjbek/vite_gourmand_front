@@ -1,20 +1,59 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <!-- HEADER vite et gourmand-->
+
+    <q-header elevated class="vg-header">
       <q-toolbar>
-        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
+        <!-- Bloc de gauche : logo + vite et gourmand-->
+        <div class="row items-center no-wrap">
+          <q-icon name="restaurant" size="22px" class="q-mr-sm" />
+          <q-toolbar-title class="vg-title"> Vite &amp; Gourmand </q-toolbar-title>
+        </div>
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <!-- q-space pousse à droite l icone connexion et le menu burger-->
+        <q-space />
+        <!-- Partie mobile -->
+        <div class="row items-center no-wrap vg-actions-mobile lt-md">
+          <!-- Icône connexion -->
+          <q-btn flat dense round icon="person" aria-label="Connexion" to="/connexion" />
+          <!-- Icône menu burger qui ouvre ou ferme le drawer -->
+          <q-btn
+            flat
+            dense
+            round
+            icon="menu"
+            aria-label="Menu"
+            @click="leftDrawerOpen = !leftDrawerOpen"
+          />
+        </div>
+        <!-- Menu desktop uniquement -->
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div class="row items-center q-gutter-sm gt-sm">
+          <q-btn flat dense label="Accueil" to="/" />
+          <q-btn flat dense label="Menu" to="/menu" />
+          <q-btn flat dense label="Connexion" to="/connexion" />
+          <q-btn flat dense label="Contact" to="/contact" />
+        </div>
       </q-toolbar>
     </q-header>
+    <!-- DRAWER : menu coulissant mobile ouvert ou fermé grâce à leftDrawerOpen -->
+    <q-drawer v-model="leftDrawerOpen" bordered overlay class="vg-drawer">
+      <q-list padding>
+        <q-item clickable v-ripple to="/" @click="leftDrawerOpen = false">
+          <q-item-section>Accueil</q-item-section>
+        </q-item>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+        <q-item clickable v-ripple to="/menu" @click="leftDrawerOpen = false">
+          <q-item-section>Menu</q-item-section>
+        </q-item>
 
-        <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
+        <q-item clickable v-ripple to="/connexion" @click="leftDrawerOpen = false">
+          <q-item-section>Connexion</q-item-section>
+        </q-item>
+
+        <q-item clickable v-ripple to="/contact" @click="leftDrawerOpen = false">
+          <q-item-section>Contact</q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -26,56 +65,19 @@
 
 <script setup>
 import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
-  },
-]
 
 const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
 </script>
+
+<style scoped>
+.vg-header {
+  background: #070300;
+  color: #f7f3e6;
+}
+
+.vg-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.2px;
+}
+</style>
