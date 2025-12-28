@@ -5,11 +5,10 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: 'mentions-legales', component: () => import('pages/MentionsLegales.vue') },
+      { path: 'cgv', component: () => import('pages/Cgv.vue') },
     ],
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue'),
