@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lff">
     <!-- HEADER vite et gourmand-->
 
     <q-header elevated class="vg-header">
@@ -63,11 +63,8 @@
     <!-- Pied de page visible sur toutes les pages -->
     <q-footer class="vg-footer">
       <div class="footer-container">
-        <!-- Horaires statiques à ce stade (modifiables plus tard par les employes)-->
-        <div class="footer-block footer-hours">
-          <span class="footer-title-horaires">Horaires :</span>
-          <span class="footer-hours-text">Lun–Dim · 09:00–23:00</span>
-        </div>
+        <!-- Composant affichage des horaires-->
+        <footer-opening-hours />
 
         <!-- lien pour les Mentions légales -->
         <div class="footer-block">
@@ -84,6 +81,7 @@
 </template>
 
 <script setup>
+import FooterOpeningHours from 'src/components/FooterOpeningHours.vue'
 import { ref } from 'vue'
 
 const leftDrawerOpen = ref(false)
@@ -115,7 +113,7 @@ const leftDrawerOpen = ref(false)
   margin: 0 auto;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
