@@ -1,0 +1,36 @@
+/* Page */
+.vg-page {
+  background-color: #f7f3e6;
+  color: #070300;
+}
+
+/* Container */
+.vg-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 1024px) {
+  .vg-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* Section avec bordure */
+.vg-section-border {
+  box-sizing: border-box;
+  border-left: 8px solid #070300;
+  border-right: 8px solid #070300;
+  border-top: 4px solid #070300;
+  border-bottom: 4px solid #070300;
+}
+
+/* Section claire */
+.vg-section-light {
+  background-color: #f7f3e6;
+  color: #070300;
+}

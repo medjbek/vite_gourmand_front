@@ -1,8 +1,8 @@
 <template>
-  <q-page class="bg-page">
+  <q-page class="vg-page">
     <!-- SECTION PRINCIPALE -->
-    <section class="section-principale q-pa-md border-section">
-      <div class="section-container">
+    <section class="section-principale q-pa-md vg-section-border">
+      <div class="vg-container">
         <div class="row items-center q-col-gutter-lg wrap">
           <!-- Colonne texte principale -->
           <div class="col-xs-12 col-md-6 section-principale-text">
@@ -30,8 +30,8 @@
     </section>
 
     <!-- SECTION PRESENTATION -->
-    <section class="section-light section-presentation q-pa-md border-section">
-      <div class="section-container">
+    <section class="vg-section-light section-presentation q-pa-md vg-section-border">
+      <div class="vg-container">
         <div class="row items-center q-col-gutter-lg wrap">
           <!-- colonne  texte presentation-->
           <div class="col-xs-12 col-md-6 presentation-texte">
@@ -46,7 +46,7 @@
 
             <q-btn
               label="Voir nos menus"
-              class="q-mt-lg btn-secondary-outline"
+              class="q-mt-lg vg-btn-secondary"
               outline
               rounded
               padding="sm lg"
@@ -69,8 +69,8 @@
     </section>
 
     <!-- SECTION NOTRE HISTOIRE -->
-    <section class="section-histoire q-pa-md border-section">
-      <div class="section-container">
+    <section class="section-histoire q-pa-md vg-section-border">
+      <div class="vg-container">
         <div class="row items-center q-col-gutter-lg wrap">
           <!-- colonne photo histoire -->
           <div class="col-xs-12 col-md-6 histoire-image-col">
@@ -102,8 +102,8 @@
       </div>
     </section>
     <!-- SECTION NOTRE ÉQUIPE -->
-    <section class="section-equipe q-pa-md border-section">
-      <div class="section-container">
+    <section class="section-equipe q-pa-md vg-section-border">
+      <div class="vg-container">
         <div class="row items-center q-col-gutter-lg wrap">
           <!-- colonne  texte equipe-->
           <div class="col-xs-12 col-md-6 equipe-texte">
@@ -132,16 +132,18 @@
       </div>
     </section>
     <!-- SECTION AVIS CLIENTS (carousel plus tard) -->
-    <section class="section-light section-avis q-pa-md border-section">
-      <div class="avis-client">
-        <q-img
-          src="src/assets/avis-client-carousel.png"
-          alt="futur  carousel avis clients"
-          :ratio="24 / 9"
-          fit="contain"
-          loading="lazy"
-          class="avis-image"
-        />
+    <section class="vg-section-light section-avis q-pa-md vg-section-border">
+      <div class="vg-container">
+        <div class="avis-client">
+          <q-img
+            src="src/assets/avis-client-carousel.png"
+            alt="futur  carousel avis clients"
+            :ratio="24 / 9"
+            fit="contain"
+            loading="lazy"
+            class="avis-image"
+          />
+        </div>
       </div>
     </section>
   </q-page>
@@ -157,14 +159,6 @@
 .section-principale {
   background-color: #4e2b05; /*  Primary-Dark */
   color: #f7f3e6; /* texte clair */
-}
-
-.section-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
 }
 
 .section-principale-text {
@@ -207,23 +201,6 @@
   }
 }
 
-/* --- STYLES A REUTILISER --- */
-.bg-page {
-  background-color: #f7f3e6;
-}
-.border-section {
-  box-sizing: border-box;
-  border-left: 8px solid #070300;
-  border-right: 8px solid #070300;
-  border-top: 4px solid #070300;
-  border-bottom: 4px solid #070300;
-}
-
-.section-light {
-  background-color: #f7f3e6;
-  color: #070300;
-}
-
 /* liste à puces */
 
 .bullet-list {
@@ -236,13 +213,6 @@
 
 .bullet-list li + li {
   margin-top: 12px; /* petit espace entre chaque puce */
-}
-
-/* bouton secondary (outline Quasar) */
-.btn-secondary-outline {
-  color: #281504; /*  couleur primary  */
-  border: 2px solid #281504;
-  font-weight: 600;
 }
 
 /*---CSS SECTION PRESENTATION---*/

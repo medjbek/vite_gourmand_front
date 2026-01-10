@@ -1,0 +1,50 @@
+/* --- Reprise de la  charte --- */
+:root {
+  --vg-text-dark: #070300;
+  --vg-text-light: #f7f3e6;
+  --vg-bg-light: #f7f3e6;
+  --vg-primary: #281504;
+  --vg-primary-dark: #4e2b05;
+  --vg-border: #281514;
+}
+
+/* Bouton principal  */
+.vg-btn-primary {
+  background: var(--vg-primary);
+  color: var(--vg-text-light);
+  text-transform: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 10px 18px;
+}
+
+/* Bouton secondaire fond transparent */
+.vg-btn-secondary {
+  background: transparent;
+  color: var(--vg-primary);
+  border: 2px solid var(--vg-primary);
+  text-transform: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 10px 18px;
+}
+
+/* Comportement (focus clavier)  touche tab géré par quasar : presence d un halo autour des boutons */
+
+.vg-card {
+  border-radius: 12px;
+  background: var(--vg-bg-light);
+  border: 2px solid var(--vg-border);
+}
+
+.vg-card-section {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .vg-card-section {
+    padding: 16px;
+  }
+}
