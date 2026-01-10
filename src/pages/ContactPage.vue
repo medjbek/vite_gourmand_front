@@ -1,8 +1,8 @@
 <template>
-  <q-page class="contact-page">
+  <q-page class="vg-page">
     <!-- SECTION PRINCIPALE -->
     <section class="contact-page__principal q-pa-md">
-      <div class="contact-page__container">
+      <div class="vg-container">
         <h1 class="contact-page__title">Contact</h1>
         <p class="contact-page__subtitle">
           Une question sur un menu, une livraison ou une demande spécifique ? Envoie-nous un
@@ -13,7 +13,7 @@
 
     <!-- SECTION CONTENU -->
     <section class="contact-page__section q-pa-md">
-      <div class="contact-page__container contact-page__grid">
+      <div class="vg-container contact-page__grid">
         <!-- BLOC INFOS -->
         <div class="contact-page__content contact-page__infos">
           <h2 class="contact-page__h2">Nos coordonnées</h2>
@@ -73,13 +73,20 @@
 
             <div class="row items-center q-gutter-sm">
               <q-btn
-                class="contact-page__btn"
+                class="vg-btn-primary"
                 type="submit"
                 label="Envoyer"
                 :loading="loading"
                 :disable="loading"
+                unelevated
               />
-              <q-btn flat label="Réinitialiser" :disable="loading" @click="reset" />
+              <q-btn
+                class="vg-btn-secondary contact-btn-secondary-flat"
+                flat
+                label="Réinitialiser"
+                :disable="loading"
+                @click="reset"
+              />
             </div>
 
             <p class="contact-page__helper">
@@ -162,13 +169,13 @@ async function submit() {
       message: form.message,
     })
 
-    // ✅ vide les champs
+    // vide les champs
     formRef.value?.reset?.()
 
-    // ✅ enlève le rouge
+    // enlève le rouge
     formRef.value?.resetValidation?.()
 
-    // ✅ Message succès
+    // Message succès
     feedback.value = 'Message envoyé ✅'
     feedbackType.value = 'success'
   } catch (err) {
@@ -186,19 +193,6 @@ async function submit() {
 </script>
 
 <style scoped>
-/* Page */
-.contact-page {
-  background: #f7f3e6;
-  color: #070300;
-}
-
-/* Container */
-.contact-page__container {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
 /* Section principale */
 .contact-page__principal {
   background: #070300;
@@ -263,14 +257,12 @@ async function submit() {
   font-size: 17px;
 }
 
-/* Bouton */
-.contact-page__btn {
-  background: #281504;
-  color: #f7f3e6;
-  border-radius: 10px;
-  padding: 0 18px;
+/* Effet bouton reinitialise applati */
+.contact-btn-secondary-flat {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 1.1;
 }
-
 /* Texte d’aide */
 .contact-page__helper {
   font-family: 'Inter', sans-serif;

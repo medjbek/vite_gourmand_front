@@ -1,9 +1,9 @@
 <!-- src/pages/MentionsLegales.vue -->
 <template>
-  <q-page class="ml-page">
+  <q-page class="vg-page">
     <!-- SECTION PRINCIPALE  -->
-    <section class="ml-principal q-pa-md">
-      <div class="ml-container">
+    <section class="q-pa-md">
+      <div class="vg-container">
         <h1 class="ml-title">Mentions légales</h1>
         <p class="ml-subtitle">
           Informations relatives à l’éditeur, à l’hébergement et au traitement des données
@@ -14,7 +14,7 @@
 
     <!-- CONTENU -->
     <section class="ml-content q-pa-md">
-      <div class="ml-container">
+      <div class="vg-container">
         <q-card flat bordered class="ml-legal">
           <q-card-section class="ml-legal__section">
             <h2 class="ml-legal__title">1. Éditeur du site</h2>
@@ -120,7 +120,7 @@
 
         <!-- Bouton retour -->
         <div class="ml-backbtn q-mt-md">
-          <q-btn unelevated rounded label="Retour à l’accueil" to="/" class="ml-btn" />
+          <q-btn unelevated label="Retour à l’accueil" to="/" class="vg-btn-primary" />
         </div>
       </div>
     </section>
@@ -132,29 +132,6 @@
 </script>
 
 <style scoped>
-/* Page */
-.ml-page {
-  background-color: #f7f3e6;
-  color: #070300;
-}
-
-/* Conteneur commun */
-
-.ml-container {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-@media (min-width: 1024px) {
-  .ml-container {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-}
-
 /* Section principale*/
 
 .ml-title {
@@ -217,16 +194,6 @@
 .ml-backbtn {
   display: flex;
   justify-content: flex-start;
-}
-
-.ml-btn {
-  background: #281514; /* primary (charte VG) */
-  color: #f7f3e6;
-  text-transform: none;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  padding: 10px 18px;
-  border-radius: 999px;
 }
 
 /* Responsive */

@@ -1,9 +1,9 @@
 <!-- src/pages/CGV.vue -->
 <template>
-  <q-page class="cgv-page">
+  <q-page class="vg-page">
     <!-- SECTION PRINCIPALE -->
     <section class="cgv-principal q-pa-md">
-      <div class="cgv-container">
+      <div class="vg-container">
         <h1 class="cgv-title">Conditions Générales de Vente</h1>
         <p class="cgv-subtitle">
           Les présentes CGV définissent les modalités de commande, de paiement, de livraison et les
@@ -14,7 +14,7 @@
 
     <!-- CONTENU -->
     <section class="cgv-content q-pa-md">
-      <div class="cgv-container">
+      <div class="vg-container">
         <q-card flat bordered class="cgv-legal">
           <q-card-section class="cgv-legal__section">
             <h2 class="cgv-legal__title">1. Objet</h2>
@@ -102,7 +102,7 @@
 
         <!-- Bouton retour -->
         <div class="cgv-backbtn q-mt-md">
-          <q-btn unelevated rounded label="Retour à l’accueil" to="/" class="cgv-btn" />
+          <q-btn unelevated label="Retour à l’accueil" to="/" class="vg-btn-primary" />
         </div>
       </div>
     </section>
@@ -117,28 +117,6 @@ defineOptions({
 </script>
 
 <style scoped>
-/* Page */
-.cgv-page {
-  background-color: #f7f3e6;
-  color: #070300;
-}
-
-/* Conteneur commun */
-.cgv-container {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-@media (min-width: 1024px) {
-  .cgv-container {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-}
-
 /* Section principale */
 .cgv-title {
   font-family: 'Playfair Display', serif;
@@ -192,16 +170,6 @@ defineOptions({
 .cgv-backbtn {
   display: flex;
   justify-content: flex-start;
-}
-
-.cgv-btn {
-  background: #281514; /* primary (charte VG) */
-  color: #f7f3e6;
-  text-transform: none;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  padding: 10px 18px;
-  border-radius: 999px;
 }
 
 /* Responsive */
