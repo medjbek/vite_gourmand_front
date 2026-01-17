@@ -8,17 +8,58 @@
       </div>
     </section>
 
-    <!-- SECTION FILTRES statique à ce stade: (Prévu VG-17) -->
+    <!-- SECTION FILTRES -->
     <section class="vg-section vg-section-border">
       <div class="vg-container">
         <h2 class="filtersTitle">Filtres (prévu VG-17)</h2>
+        <div class="row q-col-gutter-md q-mt-sm items-center">
+          <!-- THEMES  -->
+          <q-option-group
+            v-model="filters.themeId"
+            :options="themeOptions"
+            type="radio"
+            inline
+            dense
+          />
 
-        <div class="row q-col-gutter-sm q-mt-sm">
-          <q-chip outline>Thème</q-chip>
-          <q-chip outline>Régime</q-chip>
-          <q-chip outline>Prix maximum</q-chip>
-          <q-chip outline>Fourchette de prix</q-chip>
-          <q-chip outline>Nombre minimum de personnes</q-chip>
+          <!-- REGIMES -->
+          <q-option-group
+            v-model="filters.dietId"
+            :options="dietOptions"
+            type="radio"
+            inline
+            dense
+          />
+
+          <!-- PRIX FOURCHETTE ET MAX-->
+          <q-input
+            v-model.number="filters.priceMin"
+            type="number"
+            dense
+            outlined
+            label="Prix min (€)"
+            style="max-width: 160px"
+          />
+
+          <q-input
+            v-model.number="filters.priceMax"
+            type="number"
+            dense
+            outlined
+            label="Prix max (€)"
+            style="max-width: 160px"
+          />
+
+          <q-input
+            v-model.number="filters.minPeople"
+            type="number"
+            dense
+            outlined
+            label="Nb personnes"
+            style="max-width: 160px"
+          />
+
+          <q-btn outline label="Réinitialiser" @click="resetFilters" />
         </div>
       </div>
     </section>
@@ -34,20 +75,21 @@
         </div>
 
         <div v-if="!loading && !error" class="q-mt-md">
-          <div class="text-subtitle1 q-mb-md">Menus récupérés : {{ listMenu.length }}</div>
+          <div class="text-subtitle1 q-mb-md">Menus affichés : {{ filteredMenus.length }}</div>
         </div>
       </div>
 
       <!-- Sections affichage Menus-->
       <template v-if="!loading && !error">
-        <MenuSection title="Tous les menus" :items="listMenu" />
+        <MenuSection title="Tous les menus" :items="filteredMenus" />
       </template>
     </section>
   </q-page>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, onActivated, ref, computed } from 'vue'
+
 import { fetchMenus } from 'src/services/menuService'
 import MenuSection from 'src/components/MenuSection.vue'
 
@@ -55,20 +97,84 @@ const loading = ref(false)
 const error = ref('')
 const listMenu = ref([])
 
-onMounted(async () => {
+const filters = ref({
+  themeId: null,
+  dietId: null,
+  priceMin: null,
+  priceMax: null,
+  minPeople: null,
+})
+
+const themeOptions = [
+  { label: 'Noël', value: 1 },
+  { label: 'Pâques', value: 2 },
+  { label: 'Classique', value: 3 },
+  { label: 'Évènement', value: 4 },
+]
+
+const dietOptions = [
+  { label: 'Végétarien', value: 1 },
+  { label: 'Vegan', value: 2 },
+  { label: 'Classique', value: 3 },
+  { label: 'Sans gluten', value: 4 },
+  { label: 'Sans lactose', value: 5 },
+]
+
+function resetFilters() {
+  filters.value = {
+    themeId: null,
+    dietId: null,
+    priceMin: null,
+    priceMax: null,
+    minPeople: null,
+  }
+}
+
+const filteredMenus = computed(() => {
+  const f = filters.value
+
+  // si  min > max "aucun résultat"
+  if (f.priceMin != null && f.priceMax != null && Number(f.priceMin) > Number(f.priceMax)) {
+    return []
+  }
+
+  return listMenu.value.filter((menu) => {
+    // Thème exclusif
+    if (f.themeId != null && Number(menu.theme?.id) !== Number(f.themeId)) return false
+
+    // Régime exclusif
+    if (f.dietId != null) {
+      const diets = Array.isArray(menu.diets) ? menu.diets : []
+      const hasDiet = diets.some((d) => Number(d.id) === Number(f.dietId))
+      if (!hasDiet) return false
+    }
+
+    // Prix
+    if (f.priceMax != null && Number(menu.base_price) > Number(f.priceMax)) return false
+    if (f.priceMin != null && Number(menu.base_price) < Number(f.priceMin)) return false
+
+    // Personnes NBRE
+    if (f.minPeople != null && Number(menu.minimum_people) > Number(f.minPeople)) return false
+
+    return true
+  })
+})
+async function loadMenus() {
   loading.value = true
   error.value = ''
 
   try {
-    const payload = await fetchMenus()
-
-    listMenu.value = Array.isArray(payload.data) ? payload.data : []
+    listMenu.value = await fetchMenus()
   } catch {
     error.value = 'Impossible de charger les menus depuis l’API'
+    listMenu.value = []
   } finally {
     loading.value = false
   }
-})
+}
+
+onMounted(loadMenus)
+onActivated(loadMenus)
 </script>
 
 <style scoped>
