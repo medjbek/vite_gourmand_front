@@ -37,6 +37,7 @@
   border-radius: 12px;
   background: var(--vg-bg-light);
   border: 2px solid var(--vg-border);
+  color: var(--vg-text-dark);
 }
 
 .vg-card-section {

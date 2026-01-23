@@ -34,3 +34,9 @@
   background-color: #f7f3e6;
   color: #070300;
 }
+
+/* Section sombre */
+.vg-section-dark {
+  background-color: #4e2b05;
+  color: #f7f3e6;
+}
