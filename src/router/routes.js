@@ -8,6 +8,7 @@ const routes = [
       { path: 'cgv', component: () => import('pages/Cgv.vue') },
       { path: 'contact', component: () => import('pages/ContactPage.vue') },
       { path: 'menu', component: () => import('pages/MenuPage.vue') },
+      { path: 'menus/:id', component: () => import('pages/MenuDetailPage.vue') },
     ],
   },
 
