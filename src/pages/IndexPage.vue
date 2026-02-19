@@ -18,7 +18,7 @@
           <div class="col-xs-12 col-md-6 section-principale-image-col">
             <q-img
               class="section-principale-image"
-              src="src/assets/principale-photo.jpg"
+              src="/assets/principale-photo.jpg"
               alt="Table dressée avec un plat Vite & Gourmand"
               fit="cover"
               :ratio="4 / 3"
@@ -57,7 +57,7 @@
           <div class="col-xs-12 col-md-6 presentation-image-col">
             <q-img
               class="presentation-img"
-              src="src/assets/presentation.jpg"
+              src="/assets/presentation.jpg"
               alt="Plateau repas Vite & Gourmand"
               fit="cover"
               :ratio="4 / 3"
@@ -75,7 +75,7 @@
           <!-- colonne photo histoire -->
           <div class="col-xs-12 col-md-6 histoire-image-col">
             <q-img
-              src="src/assets/histoire.jpg"
+              src="/assets/histoire.jpg"
               alt="Livraison artisanale Vite & Gourmand"
               :ratio="4 / 3"
               class="histoire-img"
@@ -119,7 +119,7 @@
           <!-- colonne photo image -->
           <div class="col-xs-12 col-md-6">
             <q-img
-              src="src/assets/equipe.jpg"
+              src="/assets/equipe.jpg"
               alt="L'équipe Vite & Gourmand"
               :ratio="4 / 3"
               class="equipe-img"
@@ -136,7 +136,7 @@
       <div class="vg-container">
         <div class="avis-client">
           <q-img
-            src="src/assets/avis-client-carousel.png"
+            src="/assets/avis-client-carousel.png"
             alt="futur  carousel avis clients"
             :ratio="24 / 9"
             fit="contain"

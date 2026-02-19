@@ -162,7 +162,7 @@ async function submit() {
   feedbackType.value = 'info'
 
   try {
-    await axios.post(`${API_BASE}/api/contact`, {
+    await axios.post(`${API_BASE}/contact`, {
       name: form.name,
       email: form.email,
       subject: form.subject,
