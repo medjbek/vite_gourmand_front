@@ -1,22 +1,34 @@
 <template>
   <q-layout view="lHh Lpr lff">
-    <!-- HEADER vite et gourmand-->
-
     <q-header elevated class="vg-header">
       <q-toolbar>
-        <!-- Bloc de gauche : logo + vite et gourmand-->
         <div class="row items-center no-wrap">
           <q-icon name="restaurant" size="22px" class="q-mr-sm" />
-          <q-toolbar-title class="vg-title"> Vite &amp; Gourmand </q-toolbar-title>
+          <q-toolbar-title class="vg-title">Vite &amp; Gourmand</q-toolbar-title>
         </div>
 
-        <!-- q-space pousse à droite l icone connexion et le menu burger-->
         <q-space />
-        <!-- Partie mobile -->
-        <div class="row items-center no-wrap vg-actions-mobile lt-md">
-          <!-- Icône connexion -->
-          <q-btn flat dense round icon="person" aria-label="Connexion" to="/connexion" />
-          <!-- Icône menu burger qui ouvre ou ferme le drawer -->
+
+        <!-- Mobile -->
+        <div class="row items-center no-wrap lt-md">
+          <q-btn
+            flat
+            dense
+            round
+            icon="person_add"
+            aria-label="Inscription"
+            to="/inscription"
+            class="q-mr-xs"
+          />
+          <q-btn
+            flat
+            dense
+            round
+            icon="person"
+            aria-label="Connexion"
+            to="/connexion"
+            class="q-mr-xs"
+          />
           <q-btn
             flat
             dense
@@ -26,17 +38,18 @@
             @click="leftDrawerOpen = !leftDrawerOpen"
           />
         </div>
-        <!-- Menu desktop uniquement -->
 
+        <!-- Desktop -->
         <div class="row items-center q-gutter-sm gt-sm">
           <q-btn flat dense label="Accueil" to="/" />
           <q-btn flat dense label="Menu" to="/menu" />
+          <q-btn flat dense label="Inscription" to="/inscription" />
           <q-btn flat dense label="Connexion" to="/connexion" />
           <q-btn flat dense label="Contact" to="/contact" />
         </div>
       </q-toolbar>
     </q-header>
-    <!-- DRAWER : menu coulissant mobile ouvert ou fermé grâce à leftDrawerOpen -->
+
     <q-drawer v-model="leftDrawerOpen" bordered overlay class="vg-drawer">
       <q-list padding>
         <q-item clickable v-ripple to="/" @click="leftDrawerOpen = false">
@@ -45,6 +58,10 @@
 
         <q-item clickable v-ripple to="/menu" @click="leftDrawerOpen = false">
           <q-item-section>Menu</q-item-section>
+        </q-item>
+
+        <q-item clickable v-ripple to="/inscription" @click="leftDrawerOpen = false">
+          <q-item-section>Inscription</q-item-section>
         </q-item>
 
         <q-item clickable v-ripple to="/connexion" @click="leftDrawerOpen = false">
@@ -60,18 +77,15 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <!-- Pied de page visible sur toutes les pages -->
+
     <q-footer class="vg-footer">
       <div class="footer-container">
-        <!-- Composant affichage des horaires-->
         <footer-opening-hours />
 
-        <!-- lien pour les Mentions légales -->
         <div class="footer-block">
           <q-btn flat class="footer-link" label="Mentions légales" to="/mentions-legales" />
         </div>
 
-        <!-- lien pour CGV -->
         <div class="footer-block">
           <q-btn flat class="footer-link" label="CGV" to="/cgv" />
         </div>
@@ -103,29 +117,26 @@ const leftDrawerOpen = ref(false)
   background-color: #070300;
   color: #f7f3e6;
   padding: 28px 16px;
-  /* Option : petite séparation visuelle */
   border-top: 1px solid rgba(247, 243, 230, 0.18);
 }
-/* CSS Conteneur principal du footer */
+
 .footer-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
 }
-/* Style pour chaque section du footer (horaire, CGV, et mentions légales) */
+
 .footer-block {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   line-height: 1.6;
 }
 
-/* affichage sur une seule ligne de la section horaire */
 .footer-hours {
   display: flex;
   align-items: center;
@@ -143,7 +154,7 @@ const leftDrawerOpen = ref(false)
   opacity: 0.95;
   white-space: nowrap;
 }
-/* Liens : mentions légales, CGV) */
+
 .footer-link {
   color: #f7f3e6;
   text-transform: none;
@@ -158,13 +169,14 @@ const leftDrawerOpen = ref(false)
   outline-offset: 6px;
   border-radius: 6px;
 }
-/* Responsive mobile : empilement vertical  */
+
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
     text-align: center;
     gap: 14px;
   }
+
   .footer-hours {
     justify-content: center;
     flex-wrap: wrap;

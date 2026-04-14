@@ -9,6 +9,7 @@ const routes = [
       { path: 'contact', component: () => import('pages/ContactPage.vue') },
       { path: 'menu', component: () => import('pages/MenuPage.vue') },
       { path: 'menus/:id', component: () => import('pages/MenuDetailPage.vue') },
+      { path: 'inscription', component: () => import('pages/RegisterPage.vue') },
     ],
   },
 
