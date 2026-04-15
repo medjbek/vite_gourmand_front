@@ -10,6 +10,7 @@ const routes = [
       { path: 'menu', component: () => import('pages/MenuPage.vue') },
       { path: 'menus/:id', component: () => import('pages/MenuDetailPage.vue') },
       { path: 'inscription', component: () => import('pages/RegisterPage.vue') },
+      { path: 'connexion', component: () => import('pages/LoginPage.vue') },
     ],
   },
 
