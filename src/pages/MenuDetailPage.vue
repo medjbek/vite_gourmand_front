@@ -10,9 +10,11 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { isLoggedIn } from 'src/services/authState'
 
 const route = useRoute()
+const router = useRouter()
 const menuRoot = ref(null)
 
 let fetchController = null
@@ -408,7 +410,14 @@ function displayMenu(menu) {
   orderBtn.type = 'button'
   orderBtn.className = 'vg-btn-primary'
   orderBtn.textContent = 'Commander'
-  orderBtn.addEventListener('click', () => alert('Commande : à prevoir.'))
+
+  orderBtn.addEventListener('click', () => {
+    if (!isLoggedIn.value) {
+      router.push('/connexion')
+    } else {
+      router.push(`/commande/${menu.id}`)
+    }
+  })
   actions.appendChild(orderBtn)
 
   rightColumn.append(infoPanel, dishesPanel, conditionsPanel, actions)
