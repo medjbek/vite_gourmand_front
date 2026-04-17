@@ -1,17 +1,37 @@
+<script setup>
+import FooterOpeningHours from 'src/components/FooterOpeningHours.vue'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { isLoggedIn, clearAuth, syncAuth } from 'src/services/authState'
+
+const leftDrawerOpen = ref(false)
+const router = useRouter()
+
+function logout() {
+  clearAuth()
+  leftDrawerOpen.value = false
+  router.push('/')
+}
+
+onMounted(() => {
+  syncAuth()
+})
+</script>
+
 <template>
-  <q-layout view="lHh Lpr lff">
+  <q-layout view="lHh Lpr lFf" class="vg-layout">
     <q-header elevated class="vg-header">
       <q-toolbar>
         <div class="row items-center no-wrap">
           <q-icon name="restaurant" size="22px" class="q-mr-sm" />
-          <q-toolbar-title class="vg-title">Vite &amp; Gourmand</q-toolbar-title>
+          <q-toolbar-title class="vg-title"> Vite &amp; Gourmand </q-toolbar-title>
         </div>
 
         <q-space />
 
-        <!-- Mobile -->
-        <div class="row items-center no-wrap lt-md">
+        <div class="row items-center no-wrap vg-actions-mobile lt-md">
           <q-btn
+            v-if="!isLoggedIn"
             flat
             dense
             round
@@ -21,6 +41,7 @@
             class="q-mr-xs"
           />
           <q-btn
+            v-if="!isLoggedIn"
             flat
             dense
             round
@@ -28,6 +49,16 @@
             aria-label="Connexion"
             to="/connexion"
             class="q-mr-xs"
+          />
+          <q-btn
+            v-if="isLoggedIn"
+            flat
+            dense
+            round
+            icon="logout"
+            aria-label="Déconnexion"
+            class="q-mr-xs"
+            @click="logout"
           />
           <q-btn
             flat
@@ -39,12 +70,12 @@
           />
         </div>
 
-        <!-- Desktop -->
         <div class="row items-center q-gutter-sm gt-sm">
           <q-btn flat dense label="Accueil" to="/" />
           <q-btn flat dense label="Menu" to="/menu" />
-          <q-btn flat dense label="Inscription" to="/inscription" />
-          <q-btn flat dense label="Connexion" to="/connexion" />
+          <q-btn v-if="!isLoggedIn" flat dense label="Inscription" to="/inscription" />
+          <q-btn v-if="!isLoggedIn" flat dense label="Connexion" to="/connexion" />
+          <q-btn v-if="isLoggedIn" flat dense label="Déconnexion" @click="logout" />
           <q-btn flat dense label="Contact" to="/contact" />
         </div>
       </q-toolbar>
@@ -60,12 +91,28 @@
           <q-item-section>Menu</q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple to="/inscription" @click="leftDrawerOpen = false">
+        <q-item
+          v-if="!isLoggedIn"
+          clickable
+          v-ripple
+          to="/inscription"
+          @click="leftDrawerOpen = false"
+        >
           <q-item-section>Inscription</q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple to="/connexion" @click="leftDrawerOpen = false">
+        <q-item
+          v-if="!isLoggedIn"
+          clickable
+          v-ripple
+          to="/connexion"
+          @click="leftDrawerOpen = false"
+        >
           <q-item-section>Connexion</q-item-section>
+        </q-item>
+
+        <q-item v-if="isLoggedIn" clickable v-ripple @click="logout">
+          <q-item-section>Déconnexion</q-item-section>
         </q-item>
 
         <q-item clickable v-ripple to="/contact" @click="leftDrawerOpen = false">
@@ -74,13 +121,13 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container class="vg-page-container">
       <router-view />
     </q-page-container>
 
     <q-footer class="vg-footer">
       <div class="footer-container">
-        <footer-opening-hours />
+        <FooterOpeningHours />
 
         <div class="footer-block">
           <q-btn flat class="footer-link" label="Mentions légales" to="/mentions-legales" />
@@ -94,14 +141,16 @@
   </q-layout>
 </template>
 
-<script setup>
-import FooterOpeningHours from 'src/components/FooterOpeningHours.vue'
-import { ref } from 'vue'
-
-const leftDrawerOpen = ref(false)
-</script>
-
 <style scoped>
+.vg-layout {
+  background: #070300;
+}
+
+.vg-page-container {
+  background: #f7f3e6;
+  min-height: calc(100vh - 140px);
+}
+
 .vg-header {
   background: #070300;
   color: #f7f3e6;
@@ -114,7 +163,7 @@ const leftDrawerOpen = ref(false)
 }
 
 .vg-footer {
-  background-color: #070300;
+  background-color: #070300 !important;
   color: #f7f3e6;
   padding: 28px 16px;
   border-top: 1px solid rgba(247, 243, 230, 0.18);
