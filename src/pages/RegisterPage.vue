@@ -109,6 +109,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import { setAuth } from 'src/services/authState'
 
 const router = useRouter()
 const API_URL = import.meta.env.VITE_API_URL
@@ -140,8 +141,7 @@ async function register() {
 
     const { user, token } = response.data
 
-    localStorage.setItem('token', token)
-    localStorage.setItem('user', JSON.stringify(user))
+    setAuth(user, token)
 
     router.push('/connexion')
   } catch (error) {
