@@ -73,6 +73,7 @@ onMounted(() => {
         <div class="row items-center q-gutter-sm gt-sm">
           <q-btn flat dense label="Accueil" to="/" />
           <q-btn flat dense label="Menu" to="/menu" />
+          <q-btn v-if="isLoggedIn" flat dense label="Mes commandes" to="/mes-commandes" />
           <q-btn v-if="!isLoggedIn" flat dense label="Inscription" to="/inscription" />
           <q-btn v-if="!isLoggedIn" flat dense label="Connexion" to="/connexion" />
           <q-btn v-if="isLoggedIn" flat dense label="Déconnexion" @click="logout" />
@@ -89,6 +90,16 @@ onMounted(() => {
 
         <q-item clickable v-ripple to="/menu" @click="leftDrawerOpen = false">
           <q-item-section>Menu</q-item-section>
+        </q-item>
+
+        <q-item
+          v-if="isLoggedIn"
+          clickable
+          v-ripple
+          to="/mes-commandes"
+          @click="leftDrawerOpen = false"
+        >
+          <q-item-section>Mes commandes</q-item-section>
         </q-item>
 
         <q-item

@@ -12,6 +12,7 @@ const routes = [
       { path: 'inscription', component: () => import('pages/RegisterPage.vue') },
       { path: 'connexion', component: () => import('pages/LoginPage.vue') },
       { path: 'commande/:id', component: () => import('src/pages/CommandePage.vue') },
+      { path: 'mes-commandes', component: () => import('src/pages/MyOrdersPage.vue') },
     ],
   },
 
