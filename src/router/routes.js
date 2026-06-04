@@ -14,6 +14,7 @@ const routes = [
       { path: 'commande/:id', component: () => import('src/pages/CommandePage.vue') },
       { path: 'mes-commandes', component: () => import('src/pages/MyOrdersPage.vue') },
       { path: 'employe', component: () => import('src/pages/EmployeOrdersPage.vue') },
+      { path: 'admin/create-user', component: () => import('src/pages/AdminCreateUserPage.vue') },
     ],
   },
 
