@@ -1,11 +1,13 @@
 <script setup>
 import FooterOpeningHours from 'src/components/FooterOpeningHours.vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { isLoggedIn, clearAuth, syncAuth } from 'src/services/authState'
+import { isLoggedIn, user, clearAuth, syncAuth } from 'src/services/authState'
 
 const leftDrawerOpen = ref(false)
 const router = useRouter()
+
+const isAdmin = computed(() => user.value?.role === 'admin')
 
 function logout() {
   clearAuth()
@@ -29,6 +31,7 @@ onMounted(() => {
 
         <q-space />
 
+        <!-- MOBILE -->
         <div class="row items-center no-wrap vg-actions-mobile lt-md">
           <q-btn
             v-if="!isLoggedIn"
@@ -36,7 +39,6 @@ onMounted(() => {
             dense
             round
             icon="person_add"
-            aria-label="Inscription"
             to="/inscription"
             class="q-mr-xs"
           />
@@ -46,37 +48,25 @@ onMounted(() => {
             dense
             round
             icon="person"
-            aria-label="Connexion"
             to="/connexion"
             class="q-mr-xs"
           />
-          <q-btn
-            v-if="isLoggedIn"
-            flat
-            dense
-            round
-            icon="logout"
-            aria-label="Déconnexion"
-            class="q-mr-xs"
-            @click="logout"
-          />
-          <q-btn
-            flat
-            dense
-            round
-            icon="menu"
-            aria-label="Menu"
-            @click="leftDrawerOpen = !leftDrawerOpen"
-          />
+          <q-btn v-if="isLoggedIn" flat dense round icon="logout" class="q-mr-xs" @click="logout" />
+          <q-btn flat dense round icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" />
         </div>
 
         <div class="row items-center q-gutter-sm gt-sm">
           <q-btn flat dense label="Accueil" to="/" />
           <q-btn flat dense label="Menu" to="/menu" />
+
           <q-btn v-if="isLoggedIn" flat dense label="Mes commandes" to="/mes-commandes" />
+
+          <q-btn v-if="isAdmin" flat dense label="Admin" to="/admin/create-user" />
+
           <q-btn v-if="!isLoggedIn" flat dense label="Inscription" to="/inscription" />
           <q-btn v-if="!isLoggedIn" flat dense label="Connexion" to="/connexion" />
           <q-btn v-if="isLoggedIn" flat dense label="Déconnexion" @click="logout" />
+
           <q-btn flat dense label="Contact" to="/contact" />
         </div>
       </q-toolbar>
@@ -100,6 +90,16 @@ onMounted(() => {
           @click="leftDrawerOpen = false"
         >
           <q-item-section>Mes commandes</q-item-section>
+        </q-item>
+
+        <q-item
+          v-if="isAdmin"
+          clickable
+          v-ripple
+          to="/admin/create-user"
+          @click="leftDrawerOpen = false"
+        >
+          <q-item-section>Admin</q-item-section>
         </q-item>
 
         <q-item
