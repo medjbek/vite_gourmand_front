@@ -61,7 +61,8 @@ onMounted(() => {
 
           <q-btn v-if="isLoggedIn" flat dense label="Mes commandes" to="/mes-commandes" />
 
-          <q-btn v-if="isAdmin" flat dense label="Admin" to="/admin/create-user" />
+          <q-btn v-if="isAdmin" flat dense label="Gestion employé" to="/admin/create-user" />
+          <q-btn v-if="isAdmin" flat dense label="Gestion statistique" to="/admin/dashboard" />
 
           <q-btn v-if="!isLoggedIn" flat dense label="Inscription" to="/inscription" />
           <q-btn v-if="!isLoggedIn" flat dense label="Connexion" to="/connexion" />
@@ -99,7 +100,17 @@ onMounted(() => {
           to="/admin/create-user"
           @click="leftDrawerOpen = false"
         >
-          <q-item-section>Admin</q-item-section>
+          <q-item-section>Gestion employé</q-item-section>
+        </q-item>
+
+        <q-item
+          v-if="isAdmin"
+          clickable
+          v-ripple
+          to="/admin/dashboard"
+          @click="leftDrawerOpen = false"
+        >
+          <q-item-section>DGestion statistique</q-item-section>
         </q-item>
 
         <q-item
