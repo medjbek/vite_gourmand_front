@@ -9,6 +9,8 @@ const router = useRouter()
 
 const isAdmin = computed(() => user.value?.role === 'admin')
 
+const isEmploye = computed(() => user.value?.role === 'employee')
+
 function logout() {
   clearAuth()
   leftDrawerOpen.value = false
@@ -59,7 +61,8 @@ onMounted(() => {
           <q-btn flat dense label="Accueil" to="/" />
           <q-btn flat dense label="Menu" to="/menu" />
 
-          <q-btn v-if="isLoggedIn" flat dense label="Mes commandes" to="/mes-commandes" />
+          <q-btn v-if="isEmploye || isAdmin" flat dense label="Gestion commandes" to="/employe" />
+          <q-btn v-else-if="isLoggedIn" flat dense label="Mes commandes" to="/mes-commandes" />
 
           <q-btn v-if="isAdmin" flat dense label="Gestion employé" to="/admin/create-user" />
           <q-btn v-if="isAdmin" flat dense label="Gestion statistique" to="/admin/dashboard" />
@@ -84,7 +87,16 @@ onMounted(() => {
         </q-item>
 
         <q-item
-          v-if="isLoggedIn"
+          v-if="isEmploye || isAdmin"
+          clickable
+          v-ripple
+          to="/employe"
+          @click="leftDrawerOpen = false"
+        >
+          <q-item-section>Gestion commandes</q-item-section>
+        </q-item>
+        <q-item
+          v-else-if="isLoggedIn"
           clickable
           v-ripple
           to="/mes-commandes"
@@ -110,7 +122,7 @@ onMounted(() => {
           to="/admin/dashboard"
           @click="leftDrawerOpen = false"
         >
-          <q-item-section>DGestion statistique</q-item-section>
+          <q-item-section>Gestion statistique</q-item-section>
         </q-item>
 
         <q-item
@@ -187,7 +199,7 @@ onMounted(() => {
 .vg-footer {
   background-color: #070300 !important;
   color: #f7f3e6;
-  padding: 28px 16px;
+  padding: 8px 16px;
   border-top: 1px solid rgba(247, 243, 230, 0.18);
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="vg-hours">
-    <div class="vg-hours__title">Horaire</div>
+    <div class="vg-hours__title">Horaires</div>
 
     <div v-if="loading">Chargement…</div>
     <div v-else-if="error">Horaires indisponibles</div>
@@ -47,18 +47,50 @@ function formatLine(h) {
 <style scoped>
 .vg-hours {
   color: #f7f3e6;
+  min-width: 360px;
 }
+
 .vg-hours__title {
   font-weight: 700;
   margin-bottom: 8px;
 }
-.vg-hours__row {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 2px 0;
+
+.vg-hours__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr));
+  column-gap: 28px;
+  row-gap: 4px;
 }
+
+.vg-hours__row {
+  display: grid;
+  grid-template-columns: 75px 1fr;
+  gap: 8px;
+  padding: 1px 0;
+  font-size: 13px;
+}
+
+.vg-hours__day {
+  font-weight: 600;
+}
+
 .vg-hours__time {
   opacity: 0.9;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .vg-hours {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .vg-hours__list {
+    grid-template-columns: 1fr;
+  }
+
+  .vg-hours__row {
+    justify-content: center;
+  }
 }
 </style>
